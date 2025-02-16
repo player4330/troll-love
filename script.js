@@ -18,16 +18,16 @@ const noTexts = [
 noButton.addEventListener("click", function() {
     clickCount++;
 
-    // 让 Yes 变大，每次放大 2 倍
+    // 让 Yes 变大，每次放大 1.2 倍
     let yesSize = 1 + (clickCount * 1.2);
     yesButton.style.transform = `scale(${yesSize})`;
 
-    // 挤压 No 按钮，每次右移 100px
+    // 挤压 No 按钮，每次右移 50px
     let noOffset = clickCount * 50;
     noButton.style.transform = `translateX(${noOffset}px)`;
 
-    // **新增：让图片和文字往上移动**
-    let moveUp = clickCount * 25; // 每次上移 20px
+    // 让图片和文字往上移动
+    let moveUp = clickCount * 25; // 每次上移 25px
     mainImage.style.transform = `translateY(-${moveUp}px)`;
     questionText.style.transform = `translateY(-${moveUp}px)`;
 
@@ -41,8 +41,10 @@ noButton.addEventListener("click", function() {
     if (clickCount === 2) mainImage.src = "images/think.png";   // 思考
     if (clickCount === 3) mainImage.src = "images/angry.png";   // 生气
     if (clickCount === 4) mainImage.src = "images/crying.png";  // 哭
-    if (clickCount >= 5) mainImage.src = "images/crying.png";  // 之后一直是哭
+    if (clickCount === 5) noButton.style.display = "none";      // 隐藏 No 按钮
 
+    // 之后一直是哭
+    if (clickCount > 5) mainImage.src = "images/crying.png";  
 });
 
 // Yes 按钮点击后，进入表白成功页面
